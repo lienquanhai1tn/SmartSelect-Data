@@ -1,29 +1,24 @@
 name: Robot SmartSelect Tu Dong
-
 on:
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
-
-      - name: Cai dat Python
-        uses: actions/setup-python@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
-      - name: Cai dat thu vien
-        run: pip install requests
-
-      - name: Chay Robot lay so
-        run: python crawl_xo_so.py
-
+      - run: pip install requests
+      - run: python crawl_xo_so.py
       - name: Day file len GitHub
         run: |
           git config --global user.name "Robot SmartSelect"
           git config --global user.email "robot@smartselect.com"
           git add ketqua.csv
-          git commit -m "Robot da nop file moi" || exit 0
+          git commit -m "Cap nhat ket qua" || exit 0
           git push origin main --force
