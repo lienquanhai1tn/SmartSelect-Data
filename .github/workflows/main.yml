@@ -25,35 +25,5 @@ jobs:
           git config --global user.name "Robot SmartSelect"
           git config --global user.email "robot@smartselect.com"
           git add ketqua.csv
-          git commit -m "Cap nhat file moi" || exit 0
+          git commit -m "Robot da nop file moi" || exit 0
           git push origin main --force
-          name: Robot SmartSelect Tu Dong
-
-on:
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Kiểm tra code
-        uses: actions/checkout@v3
-
-      - name: Cài đặt Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-
-      - name: Cài đặt thư viện
-        run: pip install requests
-
-      - name: Chạy Robot lấy số
-        run: python crawl_xo_so.py
-
-      - name: Lưu kết quả vào GitHub
-        run: |
-          git config --global user.name "Robot SmartSelect"
-          git config --global user.email "robot@smartselect.com"
-          git add ketqua.csv
-          git commit -m "Robot đã nộp file kết quả mới" || exit 0
-          git push
