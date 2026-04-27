@@ -1,21 +1,17 @@
 import requests
 
-def lay_so_tu_dong():
-    print("🚀 Robot SmartSelect đang lấy số từ vệ tinh...")
+def lay_so():
+    print("🚀 Robot SmartSelect đang bắt đầu...")
     url = "https://api.xoso.me/app/json-kqmb"
     headers = {'User-Agent': 'Mozilla/5.0'}
-    
     try:
-        response = requests.get(url, headers=headers, timeout=15)
-        if response.status_code == 200:
-            data = response.text
+        r = requests.get(url, headers=headers, timeout=15)
+        if r.status_code == 200:
             with open("ketqua.csv", "w", encoding="utf-8") as f:
-                f.write(data)
-            print("✅ Đã lưu dữ liệu vào file ketqua.csv thành công!")
-        else:
-            print(f"❌ Lỗi kết nối: {response.status_code}")
+                f.write(r.text)
+            print("✅ Đã lưu kết quả thành công!")
     except Exception as e:
-        print(f"❌ Robot gặp sự cố: {e}")
+        print(f"❌ Lỗi: {e}")
 
 if __name__ == "__main__":
-    lay_so_tu_dong()
+    lay_so()
