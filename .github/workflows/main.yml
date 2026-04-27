@@ -1,0 +1,26 @@
+name: Robot SmartSelect Tu Dong
+on:
+  schedule:
+    - cron: '30 11 * * *'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lay code
+        uses: actions/checkout@v3
+      - name: Cai dat Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Chay file lay du lieu
+        run: |
+          pip install requests
+          python crawl_xo_so.py
+      - name: Luu ket qua
+        run: |
+          git config --global user.name 'Hoang Van Hai'
+          git config --global user.email 'bot@smartselect.vn'
+          git add ketqua.csv || echo "Chưa có file kết quả"
+          git commit -m "Robot cập nhật số" || echo "Không có thay đổi"
+          git push
