@@ -28,3 +28,10 @@ jobs:
           git add ketqua.csv
           git commit -m "Robot đã nộp file kết quả mới" || exit 0
           git push
+- name: Day file len GitHub
+        run: |
+          git config --global user.name "Robot SmartSelect"
+          git config --global user.email "robot@smartselect.com"
+          git add ketqua.csv
+          git commit -m "Robot da nop file ket qua moi" || exit 0
+          git push origin main --force
