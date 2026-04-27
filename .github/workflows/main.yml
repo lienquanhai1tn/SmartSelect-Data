@@ -7,6 +7,35 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+
+      - name: Cai dat Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Cai dat thu vien
+        run: pip install requests
+
+      - name: Chay Robot lay so
+        run: python crawl_xo_so.py
+
+      - name: Day file len GitHub
+        run: |
+          git config --global user.name "Robot SmartSelect"
+          git config --global user.email "robot@smartselect.com"
+          git add ketqua.csv
+          git commit -m "Cap nhat file moi" || exit 0
+          git push origin main --force
+          name: Robot SmartSelect Tu Dong
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
       - name: Kiểm tra code
         uses: actions/checkout@v3
 
@@ -28,10 +57,3 @@ jobs:
           git add ketqua.csv
           git commit -m "Robot đã nộp file kết quả mới" || exit 0
           git push
-- name: Day file len GitHub
-        run: |
-          git config --global user.name "Robot SmartSelect"
-          git config --global user.email "robot@smartselect.com"
-          git add ketqua.csv
-          git commit -m "Robot da nop file ket qua moi" || exit 0
-          git push origin main --force
